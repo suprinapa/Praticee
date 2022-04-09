@@ -13,22 +13,9 @@ class MemberService {
         return sql;
     }
 
-    def create() {
+    def create(Member member) {
         def connection =  connection()
-        BigInteger version = 21
-        String address = "Ktm"
-        String name = "Dai"
-
-      /*  List<Member> list = new ArrayList<>();
-
-        list.add(version)
-        list.add(address)
-        list.add(name)
-        for(int i= 0; i < list.size(); i++){
-
-        }*/
-
-       def sqlStr = "INSERT INTO member(version,address,name) VALUES (${version}, ${address}, ${name})"
+       def sqlStr = "INSERT INTO member(version,address,name) VALUES (${member.version}, ${member.address}, ${member.name})"
         try {
             connection.execute(sqlStr);
             connection.commit()

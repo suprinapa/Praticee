@@ -16,6 +16,7 @@ info:
 spring:
     jmx:
         unique-names: true
+        web-application-type: none
     main:
         banner-mode: "off"
     groovy:

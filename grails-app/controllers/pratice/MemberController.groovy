@@ -12,8 +12,12 @@ class MemberController {
         respond Member.list(params), model:[memberCount: Member.count()]
     }
 
-      def create(){
-          memberService.update()
+    def create(){
+        Member member = new Member()
+        member.version = 10
+        member.name = "Suprina"
+        member.address = "Lalitpur"
+        memberService.create(member)
           render("Created")
          // [member: flash.redirectParams]
     }
