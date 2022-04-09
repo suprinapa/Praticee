@@ -38,7 +38,7 @@ class MemberController {
     }
 
     def delete(){
-        memberService.delete()
+        memberService.delete(1)
         render("Deleted")
     }
 }

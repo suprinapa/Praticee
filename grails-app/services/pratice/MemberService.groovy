@@ -40,7 +40,6 @@ class MemberService {
     def update(){
         def connection =  connection()
             def sqlStr = "UPDATE member SET id = id + 6 WHERE address = 'Ktm'"
-
             try {
                 connection.execute(sqlStr);
                 connection.commit()
@@ -52,9 +51,9 @@ class MemberService {
             connection.close()
         }
 
-    def delete() {
+    def delete(BigInteger id) {
         def connection =  connection()
-        def sqlStr = "DELETE FROM member WHERE name='Dai'"
+        def sqlStr = "DELETE FROM member WHERE id="+id
         try {
             connection.execute(sqlStr);
             connection.commit()
