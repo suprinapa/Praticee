@@ -1,27 +1,40 @@
 package pratice
 
 import grails.gorm.transactions.ReadOnly
-import groovy.sql.Sql
 
 @ReadOnly
 class MemberController {
 
-    def create(params){
-        def member = MemberService.newInstance()
-        member.create(params)
-        render("Created")
-    }
-    def getAllData(){
-        // Creating a connection to the database
-        def sql = Sql.newInstance('jdbc:mysql://localhost:3306/myapp', 'root',
-                'root', 'com.mysql.jdbc.Driver')
+    MemberService memberService
 
-        sql.eachRow("SELECT * FROM member") { rs ->
-            assert(rs.id)
-            assert(rs.version)
-            assert(rs.address)
-            assert(rs.name)
+    def index(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        respond Member.list(params), model:[memberCount: Member.count()]
+    }
+
+      def create(){
+          memberService.update()
+          render("Created")
+         // [member: flash.redirectParams]
+    }
+
+    def getData() {
+        def list = Member.list()
+        [list: list]
+      if (!response) {
+            redirect(controller: "home", action: "index")
+        } else {
+            [member: response]
         }
-        sql.close()
+    }
+
+    def update() {
+        memberService.update()
+        render("Updated")
+    }
+
+    def delete(){
+        memberService.delete()
+        render("Deleted")
     }
 }

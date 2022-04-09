@@ -1,0 +1,6 @@
+#Wed, 06 Apr 2022 14:56:43 +0545
+
+info.app.version=0.1
+info.app.name=Pratice
+grails.env=development
+info.app.grailsVersion=5.1.5
