@@ -43,24 +43,19 @@ class MemberService {
     }*/
 
     def getData() {
-//        def emptyMap = [:]
-        def memberList = []
         def connection =  connection()
-//        connection.eachRow('select * from member') {
-//         row -> memberList << row
-//             println "row = $row"
-//             println "memberList = $memberList"
-//        }
-        connection.eachRow('select * from member') {
+        def personlist = []
+        connection.eachRow("select * from member")
+                {
+                    row-> personlist << row.toString()
+                }
+        connection.close()
+        personlist.each{println it}
+/*        connection.eachRow('select * from member') {
             tp ->
                 println([tp.id, tp.version, tp.address, tp.name])
-//                emptyMap.put("id", tp.id)
-//                emptyMap.put("version", tp.version)
-//                emptyMap.put("address", tp.address)
-//                emptyMap.put("name", tp.name)
-        }
-        connection.close()
-        return memberList
+        connection.close()*/
+        return personlist
     }
 
     def update(Member member,GrailsParameterMap params){
