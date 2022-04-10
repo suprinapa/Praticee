@@ -7,9 +7,12 @@ class MemberController {
 
     MemberService memberService
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Member.list(params), model:[memberCount: Member.count()]
+    def index() {
+
+        def response = memberService.getData()
+        [memberList: response]
+     /*   def response = memberService.getData()
+       // [memberList: response.list, total:response.count]*/
     }
 
     def create(){
@@ -18,25 +21,25 @@ class MemberController {
         member.name = "Suprina"
         member.address = "Lalitpur"
         memberService.create(member)
-          render("Created")
-        redirect action:"index", method:"GET"
-         // [member: flash.redirectParams]
+       /* render("Created")*/
+        [member: flash.redirectParams]
+        //redirect action:"index", method:"GET"
     }
-
-    def getData() {
+/*    def getData() {
         def list = Member.list()
         [list: list]
-      if (!response) {
+*//*      if (!response) {
             redirect(controller: "home", action: "index")
         } else {
             [member: response]
-        }
-    }
+        }*//*
+    }*/
 
-    def update() {
+    def update(params) {
         def member = Member.get(params.id)
         // update properties in the employee
-        member.name = params.name
+        member.name = "Suprina"
+        member.save()
         member.address = params.address
         member.save()
         memberService.update(member,params)

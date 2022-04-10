@@ -29,13 +29,38 @@ class MemberService {
        connection.close()
     }
 
+/*    def list(GrailsParameterMap params) {
+        params.max = params.max ?: 5
+        List<Member> memberList = Member.createCriteria().list(params) {
+            if (params?.colName && params?.colValue) {
+                like(params.colName, "%" + params.colValue + "%")
+            }
+            if (!params.sort) {
+                order("id", "desc")
+            }
+        }
+        return [list: memberList, count: Member.count()]
+    }*/
+
     def getData() {
+//        def emptyMap = [:]
+        def memberList = []
         def connection =  connection()
+//        connection.eachRow('select * from member') {
+//         row -> memberList << row
+//             println "row = $row"
+//             println "memberList = $memberList"
+//        }
         connection.eachRow('select * from member') {
             tp ->
                 println([tp.id, tp.version, tp.address, tp.name])
+//                emptyMap.put("id", tp.id)
+//                emptyMap.put("version", tp.version)
+//                emptyMap.put("address", tp.address)
+//                emptyMap.put("name", tp.name)
         }
         connection.close()
+        return memberList
     }
 
     def update(Member member,GrailsParameterMap params){
