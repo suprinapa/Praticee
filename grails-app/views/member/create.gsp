@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: supri
+  Date: 4/3/2022
+  Time: 2:06 PM
+--%>
+
 <meta name="layout" content="main"/>
 
 <div class="card">
@@ -10,8 +17,8 @@
         %{--Partial Templating--}%
             <g:render template="form"/>
             <div class="form-action-panel">
-                <g:submitButton class="btn btn-primary" name="save" value="${g.message(code: "save")}"/>
-                <g:link controller="member" action="create" class="btn btn-primary"><g:message code="cancel"/></g:link>
+                <g:submitButton class="btn btn-primary" name="create" value="${g.message(code: "create")}"/>
+                <g:link controller="member" action="index" class="btn btn-primary"><g:message code="cancel"/></g:link>
             </div>
         </g:form>
     </div>

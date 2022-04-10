@@ -10,7 +10,7 @@
 <head>
     <title>Member Data</title>
 </head>
-${list.id} ${list.name} ${list.address}
+${list.id}
 <body>
 
 </body>

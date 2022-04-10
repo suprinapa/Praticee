@@ -1,6 +1,7 @@
 package pratice
 
 import grails.gorm.transactions.Transactional
+import grails.web.servlet.mvc.GrailsParameterMap
 import groovy.sql.Sql
 
 @Transactional
@@ -37,9 +38,10 @@ class MemberService {
         connection.close()
     }
 
-    def update(){
+    def update(Member member,GrailsParameterMap params){
         def connection =  connection()
-            def sqlStr = "UPDATE member SET id = id + 6 WHERE address = 'Ktm'"
+        member.properties = params
+            def sqlStr = "UPDATE member {$params} WHERE {$params}=" +params
             try {
                 connection.execute(sqlStr);
                 connection.commit()
@@ -51,7 +53,7 @@ class MemberService {
             connection.close()
         }
 
-    def delete(BigInteger id) {
+    def delete(id) {
         def connection =  connection()
         def sqlStr = "DELETE FROM member WHERE id="+id
         try {
